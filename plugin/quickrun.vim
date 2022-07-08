@@ -1,6 +1,6 @@
 function! quickrun#execute(isfull)
   silent! wall
-  let file_name = expand('%:t:r')
+  let file_name = expand('%:p:r')
   let extension = expand('%:e')
   let runner = ""
   if extension == "js"
@@ -46,14 +46,14 @@ function! quickrun#execute(isfull)
   else
     if a:isfull == "true"
       if runner == "compile"
-        execute "!term (".compiler." ".file_name.".".extension." -o ".file_name." && ./".file_name.")"
+        execute "!term (".compiler." ".file_name.".".extension." -o ".file_name." && ".file_name.")"
       else
         execute ":term ".runner." ".file_name.".".extension
       endif
     endif
     if a:isfull == "false"
       if runner == "compile"
-        execute "!(".compiler." ".file_name.".".extension." -o ".file_name." && ./".file_name.")"
+        execute "!(".compiler." ".file_name.".".extension." -o ".file_name." && ".file_name.")"
       else
         execute ":!".runner." ".file_name.".".extension
       endif
